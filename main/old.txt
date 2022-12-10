@@ -1,0 +1,306 @@
+
+    // ************************
+    // ** Communication unit **
+    // ************************
+
+    //      // Communication unit parameters
+    //      case 'A':
+    //        Mode = 'A';
+    //        send_comUNIT_parameters();
+    //        break;
+    //
+    //      // Control unit ping to comm unit
+    //      case 'M':
+    //        Mode = 'A';
+    //        send_conUNIT_ping_to_comUNIT();
+    //        break;
+    //
+    //      // Communication unit set APN
+    //      case 'B':
+    //        Mode = 'A';
+    //        packet.remove(0,1); //remove 1 character starting at index 0
+    //        set_APN(packet);
+    //        break;
+    //
+    //      // Communication unit get APN
+    //      case 'b':
+    //        Mode = 'A';
+    //        get_APN();
+    //        break;
+    //
+    //      // Communication unit status
+    //      case 'C':
+    //        Mode = 'A';
+    //        send_comUNIT_status();
+    //        break;
+    //
+    //      // Communication unit reset
+    //      case 'D':
+    //        Mode = 'A';
+    //        send_comUNIT_reset();
+    //        break;
+    //
+    //      // Communication unit ping to server
+    //      case 'E':
+    //        Mode = 'A';
+    //        send_comUNIT_ping();
+    //        break;
+    //
+    //      // Communication unit RT monitor
+    //      case 'F':
+    //        Mode = 'R'; // Real-time mode
+    //        break;
+    //
+    //      // Connected sensors
+    //      case 'G':
+    //        Mode = 'A';
+    //        send_comUNIT_sensors();
+    //        break;
+    //
+    //      // Connected hubs
+    //      case 'H':
+    //        Mode = 'A';
+    //        send_comUNIT_hubs();
+    //        break;
+    //
+    //      // Connected valves
+    //      case 'Z':
+    //        Mode = 'A';
+    //        send_comUNIT_valves();
+    //        break;
+
+    // ************************
+    // ***** Control unit *****
+    // ************************
+
+
+
+
+
+// encoder
+
+// ************************
+// ** Communication unit **
+// ************************
+
+//// A
+//void send_comUNIT_parameters()
+//{
+//  String Index = "PAR_UNIT", LoggerID = "01", CommUnitID = "02", HW_version = "03", SWEZR_version = "04", Atmel_SW_version = "05",
+//         Battery = "06", Is_charing = "07", Networkname = "08", Last_cellular_RSSI = "09", Last_transmission_time = "10",
+//         APN = "11", MCC = "12", MNC = "13";
+//
+//  SerialBT.printf("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n", Index, LoggerID, CommUnitID,
+//                  HW_version, SWEZR_version, Atmel_SW_version, Battery, Is_charing, Networkname,
+//                  Last_cellular_RSSI, Last_transmission_time, APN, MCC, MNC);
+//
+//  // Bluetooth low energy
+//  String buf;
+//  buf += Index, buf += ", ", buf += LoggerID, buf += ", ", buf += CommUnitID, buf += ", ", buf += HW_version, buf += ", ", buf += SWEZR_version, buf += ", ", buf += Atmel_SW_version, buf += ", ",
+//                                    buf += Battery, buf += ", ", buf += Is_charing, buf += ", ", buf += Networkname, buf += ", ", buf += Last_cellular_RSSI, buf += ", ", buf += Last_transmission_time, buf += ", ",
+//                                        buf += APN, buf += ", ", buf += MCC, buf += ", ", buf += MNC;
+//  update_BLE_data(buf, 0);
+//
+//}
+//
+//// B
+//void set_APN(String packet)
+//{
+//  String Index = "APN_UNIT";
+//  APN = packet;
+//  get_APN();
+//}
+//
+//// b
+//void get_APN()
+//{
+//  String Index = "APN_UNIT";
+//  SerialBT.printf("%s, %s\n", Index, APN);
+//
+//  // Bluetooth low energy
+//  String buf;
+//  buf += Index, buf += ", ", buf += APN;
+//  update_BLE_data(buf, 0);
+//}
+//
+//// S
+//void send_conUNIT_pump_last_activity() {
+//  String Index = "s", last_acitivity = "22/12/21";
+//
+//  // Bluetooth low energy
+//  String buf;
+//  buf += Index, buf += ", ", buf += last_acitivity;
+//
+//  // Send ACK via RS485 and application
+//  send_RS485_01(buf);
+//  if (ALLOW_BT) update_BLE_data(buf, 0);
+//
+//}
+//
+//// C
+//void send_comUNIT_status() {
+//  String Index = "STAT_UNIT", STATUS = "OK";
+//  SerialBT.printf("%s, %s\n", Index, STATUS);
+//
+//  // Bluetooth low energy
+//  String buf;
+//  buf += Index, buf += ", ", buf += STATUS;
+//  update_BLE_data(buf, 0);
+//}
+//
+//// D
+//void send_comUNIT_reset() {
+//  String Index = "RST_UNIT", STATUS = "OK";
+//  SerialBT.printf("%s, %s\n", Index, STATUS);
+//
+//  // Bluetooth low energy
+//  String buf;
+//  buf += Index, buf += ", ", buf += STATUS;
+//  update_BLE_data(buf, 0);
+//}
+//
+//// E
+//void send_comUNIT_ping() {
+//  String Index = "PING_UNIT", PING = "22ms";
+//  SerialBT.printf("%s, %s\n", Index, PING);
+//
+//  // Bluetooth low energy
+//  String buf;
+//  buf += Index, buf += ", ", buf += PING;
+//  update_BLE_data(buf, 0);
+//}
+//
+//
+//// G
+//void send_comUNIT_sensors() {
+//  String Index = "SENS_UNIT", Hub_ID = "01", Sensor_type = "02", Last_update_time = "03", Last_value = "04", Last_battery = "05", Last_RSSI = "06", Number_of_retries = "07";
+//  SerialBT.printf("%s, %s, %s, %s, %s, %s, %s, %s\n", Index, Hub_ID, Sensor_type, Last_update_time, Last_value, Last_battery, Last_RSSI, Number_of_retries);
+//
+//  // Bluetooth low energy
+//  String buf;
+//  buf += Index, buf += ", ", buf += Hub_ID, buf += ", ", buf += Sensor_type, buf += ", ", buf += Last_update_time, buf += ", ", buf += Last_value, buf += ", ", buf += Last_battery, buf += ", ", buf += Last_RSSI, buf += ", ", buf += Number_of_retries;
+//  update_BLE_data(buf, 0);
+//}
+//
+//// H
+//void send_comUNIT_hubs() {
+//  String Index = "HUBS_UNIT", Number_of_connected_sensors = "01", Hub_Slot_ID = "02", Last_update = "03", Last_battery = "04", Last_RSSI = "05", FW_version = "06";
+//  SerialBT.printf("%s, %s, %s, %s, %s, %s, %s\n", Index, Number_of_connected_sensors, Hub_Slot_ID, Last_update, Last_battery, Last_RSSI, FW_version);
+//
+//  // Bluetooth low energy
+//  String buf;
+//  buf += Index, buf += ", ", buf += Number_of_connected_sensors, buf += ", ", buf += Hub_Slot_ID, buf += ", ", buf += Last_update, buf += ", ", buf += Last_battery, buf += ", ", buf += Last_RSSI, buf += ", ", buf += FW_version;
+//  update_BLE_data(buf, 0);
+//}
+//
+//// Z
+//void send_comUNIT_valves() {
+//  String Index = "VALV_UNIT", Custom_name = "01", Last_update = "02", Last_battery = "03", Last_RSSI = "04", FW_version = "05";
+//  SerialBT.printf("%s, %s, %s, %s, %s, %s\n", Index, Custom_name, Last_update, Last_battery, Last_RSSI, FW_version);
+//
+//  // Bluetooth low energy
+//  String buf;
+//  buf += Index, buf += ", ", buf += Custom_name, buf += ", ", buf += Last_update, buf += ", ", buf += Last_battery, buf += ", ", buf += Last_RSSI, buf += ", ", buf += FW_version;
+//  update_BLE_data(buf, 0);
+//}
+
+
+eeprom
+
+#include "EEPROM.h"
+
+typedef struct EEPROM_SESNOR
+{
+  String NAME;                                // Sensor Name (before_filter, after_filter, pond_level)
+  int port;                                   // (10, 11, 12)
+  int functionality;                          // (0 - pressure before filter | 1 - pressure after filter | 2 - pond level)
+  String units = "PSI";                       // PSI
+  int range;                                  //  0 - 10
+  int threshold_high;                         // 5
+  int threshold_low;                          // 2
+};
+
+EEPROM_SESNOR sensor0;
+
+void reset_eeprom()
+{
+  if (ALLOW_DEBUG) Serial.println("EEPROM has been erased successfully");
+  EEPROM.put(0, sensor0);
+}
+
+void get_eeprom()
+{
+  EEPROM.get(0, sensor0);
+}
+
+void set_sensor0()
+{
+  EEPROM_SESNOR sensor0 = {
+    String NAME = "test";      // Sensor Name (before_filter, after_filter, pond_level)
+    int port = 10;             // (10, 11, 12)
+    int functionality = 0;     // (0 - pressure before filter | 1 - pressure after filter | 2 - pond level)
+    String units = "BAR";      // PSI
+    int range = 155;           //  0 - 10
+    int threshold_high = 5;    // 5
+    int threshold_low = 2;     // 2
+  };
+  EEPROM.put(0, sensor0);
+
+  if (ALLOW_DEBUG) Serial.println("sensor0 has been saved successfully");
+}
+
+void get_sensor(int sensor_number)
+{
+  EEPROM.get(0, sensor0);
+  if (ALLOW_DEBUG)
+  {
+    Serial.printf("name: %s\n", sensor0.NAME);
+    Serial.printf("port: %d\n", sensor0.port);
+    Serial.printf("functionality: %d\n", sensor0.functionality);
+    Serial.printf("units: %s\n", sensor0.units);
+    Serial.printf("range: %d\n", sensor0.range);
+    Serial.printf("threshold_high: %d\n", sensor0.threshold_high);
+    Serial.printf("threshold_low: %d\n", sensor0.threshold_low);
+  }
+}
+
+// Example: 'S0,before_filter,10,0,PSI,10,5,2'
+const String* split_string(String packet)
+{
+  String strs[20];
+  int StringCount = 0;
+
+  // Split the string into substrings
+  while (packet.length() > 0)
+  {
+    int index = packet.indexOf(',');
+    if (index == -1) // No comma found
+    {
+      strs[StringCount++] = packet;
+      break;
+    }
+    else
+    {
+      strs[StringCount++] = packet.substring(0, index);
+      packet = packet.substring(index + 1);
+    }
+  }
+
+  //  if (ALLOW_DEBUG)
+  //  {
+  //    // Show the resulting substrings
+  //    for (int i = 0; i < StringCount; i++)
+  //    {
+  //      Serial.print(i);
+  //      Serial.print(": \"");
+  //      Serial.print(strs[i]);
+  //      Serial.println("\"");
+  //    }
+  //    Serial.println();
+  //  }
+
+  //         Index  , name   ,            port,   functionality,   units,           range,  threshold_high, threshold_low
+  set_sensor(strs[0], strs[1], strs[2].toInt(), strs[3].toInt(), strs[4], strs[5].toInt(), strs[6].toInt(), strs[7].toInt());
+}
+
+
